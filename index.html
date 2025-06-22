@@ -1,0 +1,81 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Web Design</title>
+<style>
+ body {
+  background-color: blue;
+  margin: 0;
+  padding: 0;
+}
+.container {
+    display:flex;
+    justify-content: space-between;
+}
+.leftchecker, .rightchecker {
+ display:grid;
+ grid-template-columns: repeat(4,64px);
+}
+
+.square {
+  height: calc(100vh/10);
+  width: calc(100vh/10);
+  background-color: #ff0202;
+}
+.white {
+  background-color: white;
+}
+.square:hover {
+    background-color: aqua;
+}
+.leftsquare:hover .rightsquare:hover {
+    background-color: blue;
+}
+.leftsquare:nth-child(8n + 1),
+  .leftsquare:nth-child(8n + 3),
+  .leftsquare:nth-child(8n + 6),
+  .leftsquare:nth-child(8n + 8) {
+    background: white;
+  }
+.rightsquare:nth-child(8n + 1),
+  .rightsquare:nth-child(8n + 3),
+  .rightsquare:nth-child(8n + 6),
+  .rightsquare:nth-child(8n + 8) {
+    background: white;
+  }
+</style>
+<script>
+
+  function generateBoard(containerId) {
+    const container = document.getElementById(containerId);
+    const rows = 10;
+    const cols = 4;
+    const total = rows * cols;
+
+    for (let i = 0; i < total; i++) {
+      const div = document.createElement('div');
+      div.classList.add('square');
+
+      // Checker pattern (adjust as needed)
+      if ([0, 2, 5, 7].includes(i % 8)) {
+        div.classList.add('white');
+      }
+
+      container.appendChild(div);
+    }
+  }
+   window.onload = function () {
+    generateBoard('leftBoard');
+    generateBoard('rightBoard');
+  };
+</script>
+
+</head>
+<body>
+<div class="container">
+<div class="leftchecker" id="leftBoard"></div>
+<p>test</p>
+<div class="rightchecker" id="rightBoard"></div>
+</div>
+</body>
+</html> 
